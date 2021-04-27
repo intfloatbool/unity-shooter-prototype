@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 71271426772617932}
   - component: {fileID: 71271426772617922}
+  - component: {fileID: -561547713548925836}
   m_Layer: 0
   m_Name: ak47_proj
   m_TagString: Untagged
@@ -127,3 +128,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _direction: {x: 0, y: 0, z: 1}
   _speed: 55
+--- !u!114 &-561547713548925836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71271426772617923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed4e16cc2122ba41b9e74964c2e8357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disableTime: 6
+  _collisionRadius: 0.2
