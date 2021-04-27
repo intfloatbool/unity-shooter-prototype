@@ -3,6 +3,7 @@ using _Scripts.Settings;
 using _Scripts.Structs;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 
 namespace _Scripts.Battle
 {
@@ -10,6 +11,9 @@ namespace _Scripts.Battle
     {
         [SerializeField] private HittableParams _hittableParams;
 
+        [Space]
+        [SerializeField] private UnityEvent _onDeadUnityEv;
+        
         [Space]
         [Header("Runtime")]
         [SerializeField] private AliveData _currentAliveData;
@@ -45,6 +49,7 @@ namespace _Scripts.Battle
             
             if (isDead)
             {
+                _onDeadUnityEv?.Invoke();
                 OnDied?.Invoke();
             }
             
