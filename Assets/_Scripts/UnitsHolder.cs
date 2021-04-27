@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using _Scripts.Battle;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -10,6 +11,12 @@ namespace _Scripts
         [SerializeField] private UnitSpawner _unitSpawner;
 
         private LinkedList<BattleUnit> _aliveUnits;
+        
+#if UNITY_EDITOR
+        [Space]
+        [Header("Debug")]
+        [SerializeField] private List<BattleUnit> _currentUnitsEditor;
+#endif
         
         private void OnValidate()
         {
@@ -42,9 +49,18 @@ namespace _Scripts
                 battleUnit.HittableObject.OnDied += () =>
                 {
                     _aliveUnits.Remove(battleUnit);
+                    UpdateDebugEditorList();
                 };
             }
             _aliveUnits.AddLast(battleUnit);
+            UpdateDebugEditorList();
+        }
+
+        private void UpdateDebugEditorList()
+        {
+#if UNITY_EDITOR
+            _currentUnitsEditor = _aliveUnits.ToList();
+#endif
         }
     }
 }

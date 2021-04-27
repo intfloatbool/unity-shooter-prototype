@@ -12,9 +12,8 @@ namespace _Scripts.Battle
     {
         [SerializeField] private SpawnPoint[] _spawnPoints;
         [SerializeField] private bool _isExcludeSpawnPoints = true;
-
-        private LinkedList<SpawnPoint> _spawnPointList;
         
+        private LinkedList<SpawnPoint> _spawnPointList;
         public event Action<BattleUnit> OnUnitSpawned;
 
         private void OnValidate()
