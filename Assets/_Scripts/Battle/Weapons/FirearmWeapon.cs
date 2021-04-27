@@ -80,6 +80,7 @@ namespace _Scripts.Battle.Weapons
         private void HandleShot()
         {
             ShowProjectiles();
+            DetectHittable();
         }
 
         private void ShowProjectiles()
@@ -93,6 +94,21 @@ namespace _Scripts.Battle.Weapons
                 var projectile = GetProjectile(projectilePrefab);
                 projectile.transform.position = _muzzleAnchor.transform.position;
                 projectile.transform.rotation = _muzzleAnchor.transform.rotation;
+            }
+        }
+
+        private void DetectHittable()
+        {
+            if (Physics.Raycast(_muzzleAnchor.transform.position,
+                _muzzleAnchor.forward, out RaycastHit hit, Mathf.Infinity))
+            {
+                if (hit.collider.TryGetComponent(out HittableObject hittableObject))
+                {
+                    if (_lastHitData != null)
+                        hittableObject.DealDamage(
+                            _lastHitData.Value
+                        );
+                }
             }
         }
 
@@ -161,12 +177,15 @@ namespace _Scripts.Battle.Weapons
             _currentMagazine = _weaponParams.magazineAmount;
             _isReloadRequired = false;
             _isOnReloadProcess = false;
+            _isReadyToShot = true;
             OnReloadDone?.Invoke();
         }
 
         public void ReloadWeapon()
         {
+            _isReloadRequired = true;
             _isOnReloadProcess = true;
+            _isReadyToShot = false;
             OnReloadStart?.Invoke();
         }
     }

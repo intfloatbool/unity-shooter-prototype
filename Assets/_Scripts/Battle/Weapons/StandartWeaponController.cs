@@ -4,8 +4,11 @@
     {
         public override void Shot()
         {
-            //TODO: Calculate damage by WeaponSettings
-            int damage = int.MaxValue;
+            int damage = 0;
+            if (_weapon is FirearmWeapon firearmWeapon)
+            {
+                damage = firearmWeapon.weaponParams.damageData.CalculateRandomDamage();
+            }
             
             _weapon.UpdateHitData(
                 new HitData(
