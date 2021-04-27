@@ -32,13 +32,9 @@ namespace _Scripts.Battle.Weapons
         private void Awake()
         {
             Assert.IsNotNull(_weaponParams, "_weaponParams != null");
-        }
-
-        private void Start()
-        {
             SetupWeaponByParams();
         }
-
+        
         private void SetupWeaponByParams()
         {
             _currentMagazine = _weaponParams.magazineAmount;
@@ -58,7 +54,7 @@ namespace _Scripts.Battle.Weapons
             Debug.Log($"{name} shot!");
             _isReadyToShot = false;
 
-            _currentMagazine -= 1;
+            _currentMagazine -= _weaponParams.projectilesPerShot;
             _currentMagazine = Mathf.Clamp(_currentMagazine, 0, _weaponParams.magazineAmount);
 
             _isReloadRequired = _currentMagazine <= 0;
@@ -102,14 +98,20 @@ namespace _Scripts.Battle.Weapons
 
             if (_reloadTimer >= _weaponParams.reloadTime)
             {
-                _isReloadRequired = false;
-                _isOnReloadProcess = false;
                 _reloadTimer = 0f;
-                OnReloadDone?.Invoke();
+                DoneReload();
                 return;
             }
 
             _reloadTimer += Time.deltaTime;
+        }
+
+        private void DoneReload()
+        {
+            _currentMagazine = _weaponParams.magazineAmount;
+            _isReloadRequired = false;
+            _isOnReloadProcess = false;
+            OnReloadDone?.Invoke();
         }
 
         public void ReloadWeapon()

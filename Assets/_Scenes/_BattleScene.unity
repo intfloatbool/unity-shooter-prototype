@@ -1888,6 +1888,7 @@ MonoBehaviour:
   _ammoText: {fileID: 429257750}
   _reloadImg: {fileID: 1753226757}
   _weaponIconImg: {fileID: 2021104470}
+  _debugUnitOwner: {fileID: 4425428724915553661}
 --- !u!1 &2021104468
 GameObject:
   m_ObjectHideFlags: 0

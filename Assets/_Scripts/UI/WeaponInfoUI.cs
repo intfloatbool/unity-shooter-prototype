@@ -1,4 +1,5 @@
-﻿using _Scripts.Battle;
+﻿using System;
+using _Scripts.Battle;
 using _Scripts.Battle.Weapons;
 using _Scripts.Settings;
 using TMPro;
@@ -19,6 +20,10 @@ namespace _Scripts.UI
         private BattleUnit _lastOwner;
         private FirearmWeapon _lastWeapon;
         private WeaponParams _currentWeaponParams;
+
+        [Space]
+        [Header("Debug")]
+        [SerializeField] private BattleUnit _debugUnitOwner;
         
         private void Awake()
         {
@@ -26,7 +31,15 @@ namespace _Scripts.UI
             Assert.IsNotNull(_reloadImg, "_reloadImg != null");
             Assert.IsNotNull(_weaponIconImg, "_weaponIconImg != null");
         }
-        
+
+        private void Start()
+        {
+            if (_debugUnitOwner != null)
+            {
+                InitOwner(_debugUnitOwner);
+            }
+        }
+
         public void InitOwner(BattleUnit owner)
         {
             if (_lastOwner != null)
@@ -113,6 +126,8 @@ namespace _Scripts.UI
         {
             _ammoText.gameObject.SetActive(true);
             _reloadImg.gameObject.SetActive(false);
+            
+            UpdateAmmoText();
         }
 
         private void WeaponOnShot(int currentMagazine)
