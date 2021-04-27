@@ -6,6 +6,12 @@ namespace _Scripts.Common
     {
         [SerializeField] private Transform _target;
 
+        public Transform Target
+        {
+            get => _target;
+            set => _target = value;
+        }
+        
         private void Update()
         {
             if (_target.Equals(null))

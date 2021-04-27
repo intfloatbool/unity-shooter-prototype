@@ -32,7 +32,7 @@ namespace _Scripts.Battle
             Vector3 spawnPosition = Vector3.zero;
             if (_isExcludeSpawnPoints)
             {
-                if (!_spawnPointList.Any())
+                if (_spawnPointList != null && !_spawnPointList.Any())
                 {
                     _spawnPointList = null;
                 }
