@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using _Scripts.Settings;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -9,10 +11,12 @@ namespace _Scripts.Battle.Weapons
     {
         [SerializeField] private WeaponParams _weaponParams;
         public WeaponParams weaponParams => _weaponParams;
+
+        [SerializeField] private Transform _muzzleAnchor;
+
         [Space]
         [Header("Runtime")]
         [SerializeField] private int _currentMagazine;
-
         public int currentMagazine => _currentMagazine;
         
         [SerializeField] private bool _isReadyToShot;
@@ -22,21 +26,30 @@ namespace _Scripts.Battle.Weapons
         private float _reloadTimer;
         private float _shotDelayTimer;
 
+        private LinkedList<GameObject> _projectilesPool;
+
         /// <summary>
         /// int arg = remains ammo
         /// </summary>
         public event Action<int> OnShot;
         public event Action OnReloadStart;
         public event Action OnReloadDone;
-        
+
         private void Awake()
         {
             Assert.IsNotNull(_weaponParams, "_weaponParams != null");
+
+            if (_muzzleAnchor == null)
+            {
+                _muzzleAnchor = transform;
+            }
+            
             SetupWeaponByParams();
         }
         
         private void SetupWeaponByParams()
         {
+            _projectilesPool = new LinkedList<GameObject>();
             _currentMagazine = _weaponParams.magazineAmount;
         }
 
@@ -59,7 +72,44 @@ namespace _Scripts.Battle.Weapons
 
             _isReloadRequired = _currentMagazine <= 0;
             
+            HandleShot();
+            
             OnShot?.Invoke(_currentMagazine);
+        }
+
+        private void HandleShot()
+        {
+            ShowProjectiles();
+        }
+
+        private void ShowProjectiles()
+        {
+            var projectilePrefab = _weaponParams.ProjectilePrefab;
+            if (projectilePrefab == null)
+                return;
+
+            for (int i = 0; i < _weaponParams.projectilesPerShot; i++)
+            {
+                var projectile = GetProjectile(projectilePrefab);
+                projectile.transform.position = _muzzleAnchor.transform.position;
+                projectile.transform.rotation = _muzzleAnchor.transform.rotation;
+            }
+        }
+
+        private GameObject GetProjectile(GameObject prefab)
+        {
+            var freeProjectile = _projectilesPool.FirstOrDefault(p => p != null && !p.activeInHierarchy);
+            if (freeProjectile == null)
+            {
+                freeProjectile = Instantiate(prefab);
+                _projectilesPool.AddLast(freeProjectile);
+            }
+            else
+            {
+                freeProjectile.gameObject.SetActive(true);
+            }
+
+            return freeProjectile;
         }
 
         private void Update()

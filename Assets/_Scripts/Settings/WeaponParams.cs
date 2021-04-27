@@ -1,4 +1,5 @@
-﻿using _Scripts.Structs;
+﻿using _Scripts.Static;
+using _Scripts.Structs;
 using UnityEngine;
 
 namespace _Scripts.Settings
@@ -6,6 +7,21 @@ namespace _Scripts.Settings
     [CreateAssetMenu(fileName = "WeaponParams", menuName = "BattleSettings/WeaponParams")]
     public class WeaponParams : ScriptableObject
     {
+        [SerializeField] private GameObject _projectilePrefab;
+
+        public GameObject ProjectilePrefab
+        {
+            get
+            {
+                if (_projectilePrefab == null)
+                {
+                    return GameHelper.NullObjects.NullGameObject;
+                }
+
+                return _projectilePrefab;
+            }
+        }
+        
         [SerializeField] private int _magazineAmount = 10;
         public int magazineAmount => _magazineAmount;
         

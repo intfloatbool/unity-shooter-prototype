@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55321f251704043a3a71e54d99238ce, type: 3}
   m_Name: ShotGun
   m_EditorClassIdentifier: 
+  _projectilePrefab: {fileID: 71271426772617923, guid: bfdec269ab5754d4882aff04e47b5e97, type: 3}
   _magazineAmount: 10
   _nameId: Drobash
   _delay: 0.5
