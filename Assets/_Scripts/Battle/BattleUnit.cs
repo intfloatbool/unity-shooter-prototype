@@ -18,6 +18,11 @@ namespace _Scripts.Battle
 
         private void Awake()
         {
+            if (_weaponController == null)
+            {
+                _weaponController = FindObjectOfType<NullWeaponController>();
+            }
+            
             InitOwnerableChilds();
         }
 

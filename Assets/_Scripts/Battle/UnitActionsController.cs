@@ -13,6 +13,7 @@ namespace _Scripts.Battle
 
         private UnitCommandBase _shotCommand;
         private UnitCommandBase _swapWeaponsCommand;
+        private UnitCommandBase _reloadWeaponCommand;
 
         private void OnValidate()
         {
@@ -39,6 +40,7 @@ namespace _Scripts.Battle
         {
             _shotCommand = new UseWeaponCommand(_battleUnit);
             _swapWeaponsCommand = new SwapWeaponsCommand(_battleUnit);
+            _reloadWeaponCommand = new ReloadWeaponCommand(_battleUnit);
         }
 
         private void Update()
@@ -53,9 +55,14 @@ namespace _Scripts.Battle
                 _commandInvoker.RunCommand(_shotCommand);
             }
             
-            if (Input.GetMouseButtonDown(GameHelper.InputConstants.RIGHT_MOUSE))
+            if (Input.GetMouseButtonDown(GameHelper.InputConstants.MIDDLE_MOUSE))
             {
                 _commandInvoker.RunCommand(_swapWeaponsCommand);
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _commandInvoker.RunCommand(_reloadWeaponCommand);
             }
         }
     }

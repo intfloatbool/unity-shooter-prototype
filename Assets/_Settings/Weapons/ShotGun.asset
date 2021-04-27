@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55321f251704043a3a71e54d99238ce, type: 3}
   m_Name: ShotGun
   m_EditorClassIdentifier: 
+  _magazineAmount: 10
   _nameId: Drobash
   _delay: 0.5
   _reloadTime: 2
@@ -19,4 +20,4 @@ MonoBehaviour:
     _minDamage: 25
     _maxDamage: 40
   _projectilesPerShot: 2
-  _spriteIcon: {fileID: 21300000, guid: 824c228edce81bd478684f91d307f082, type: 3}
+  _spriteIcon: {fileID: 21300000, guid: 92144fb0da9a91b44a727db6ae783c01, type: 3}

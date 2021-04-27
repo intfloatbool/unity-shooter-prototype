@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -17,6 +18,8 @@ namespace _Scripts.Battle.Weapons
         public WeaponBase CurrentWeapon => _weapon;
         
         public BattleUnit Owner { get; protected set; }
+
+        public event Action<WeaponBase> OnWeaponChanged; 
 
         protected virtual void OnValidate()
         {
@@ -55,6 +58,8 @@ namespace _Scripts.Battle.Weapons
             
             _weapon = weapon;
             _weapon.gameObject.SetActive(true);
+            
+            OnWeaponChanged?.Invoke(_weapon);
         }
         
     }
