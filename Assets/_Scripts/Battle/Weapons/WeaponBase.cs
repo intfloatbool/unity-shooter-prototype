@@ -19,7 +19,7 @@ namespace _Scripts.Battle.Weapons
                 return;
             }
             
-            
+            OnShotStart();
         }
 
         protected abstract void OnShotStart();

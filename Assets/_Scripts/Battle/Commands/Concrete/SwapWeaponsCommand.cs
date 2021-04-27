@@ -8,7 +8,7 @@ namespace _Scripts.Battle.Commands.Concrete
         {
         }
 
-        protected override void Execute()
+        public override void Execute()
         {
             if (_receiverUnit == null)
                 return;

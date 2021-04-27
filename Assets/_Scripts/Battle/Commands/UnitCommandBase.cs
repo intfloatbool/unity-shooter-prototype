@@ -12,6 +12,6 @@ namespace _Scripts.Battle.Commands
             this._receiverUnit = unit;
         }
 
-        protected abstract void Execute();
+        public abstract void Execute();
     }
 }

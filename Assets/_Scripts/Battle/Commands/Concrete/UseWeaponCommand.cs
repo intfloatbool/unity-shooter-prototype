@@ -6,7 +6,7 @@
         {
         }
 
-        protected override void Execute()
+        public override void Execute()
         {
             if (_receiverUnit != null && _receiverUnit.WeaponController != null)
             {
