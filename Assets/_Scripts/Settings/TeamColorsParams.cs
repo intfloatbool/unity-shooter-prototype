@@ -23,10 +23,11 @@ namespace _Scripts.Settings
                     return _colorByTeams[i];
             }
 
-            Debug.LogError($"Color by team {teamType} is not found!");
+            Debug.LogWarning($"Color by team {teamType} is not found! Return RANDOM");
+
             return new ColorByTeam
             {
-                Color = Color.clear
+                Color = Random.ColorHSV()
             };
         } 
     }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Enums;
 using _Scripts.Static;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,13 +15,14 @@ namespace _Scripts.Battle
         public readonly BattleUnit OriginalPrefab;
         public readonly UnitSpawner UnitSpawner;
         public readonly Transform SpawnPoint;
+        public readonly TeamType TeamType;   
         
-        
-        public UnitSpawnData(BattleUnit originalPrefab, UnitSpawner unitSpawner, Transform spawnPoint)
+        public UnitSpawnData(BattleUnit originalPrefab, UnitSpawner unitSpawner, Transform spawnPoint, TeamType teamType)
         {
             this.OriginalPrefab = originalPrefab;
             this.UnitSpawner = unitSpawner;
             this.SpawnPoint = spawnPoint;
+            this.TeamType = teamType;
         }
     }
     
@@ -46,13 +48,21 @@ namespace _Scripts.Battle
         public void StartRespawnProcess(BattleUnit initiator, UnitSpawnData spawnData, float? specificTime = null)
         {
             initiator.gameObject.SetActive(false);
+
+            var spawnDataWithActualParams = new UnitSpawnData(
+                spawnData.OriginalPrefab,
+                spawnData.UnitSpawner,
+                spawnData.SpawnPoint,
+                initiator.TeamController.TeamType
+            );
+            
             if (specificTime.HasValue)
             {
-                StartCoroutine(RespawnUnitByTime(initiator, spawnData, specificTime.Value));
+                StartCoroutine(RespawnUnitByTime(initiator, spawnDataWithActualParams, specificTime.Value));
             }
             else
             {
-                RespawnUnit(initiator, spawnData);
+                RespawnUnit(initiator, spawnDataWithActualParams);
             }
         }
 
@@ -64,17 +74,17 @@ namespace _Scripts.Battle
 
         private void RespawnUnit(BattleUnit initiator, UnitSpawnData spawnData)
         {
-            Spawn(spawnData.OriginalPrefab, spawnData.SpawnPoint);
+            Spawn(spawnData.OriginalPrefab, spawnData);
             Destroy(initiator.gameObject);
         }
 
-        public void Spawn(BattleUnit unitPrefab, Transform specificSpawnPoint = null)
+        public void Spawn(BattleUnit unitPrefab, UnitSpawnData? spawnData = null)
         {
             Transform spawnPoint = null;
             Vector3 spawnPosition = Vector3.zero;
-            if (specificSpawnPoint != null)
+            if (spawnData.HasValue)
             {
-                spawnPoint = specificSpawnPoint;
+                spawnPoint = spawnData.Value.SpawnPoint;
                 spawnPosition = spawnPoint.position;
             }
             else
@@ -115,9 +125,19 @@ namespace _Scripts.Battle
             var respawnableUnit = unitInstance.GetComponentInChildren<IRespawnableUnit>(true);
             if (respawnableUnit != null)
             {
-                respawnableUnit.InitRespawnBehaviour(new UnitSpawnData(
-                    unitPrefab, this, spawnPoint
+                if (spawnData.HasValue)
+                {
+                    respawnableUnit.InitRespawnBehaviour(spawnData.Value);
+                    
+                    unitInstance.TeamController.SetTeam(spawnData.Value.TeamType);
+                }
+                else
+                {
+                    respawnableUnit.InitRespawnBehaviour(new UnitSpawnData(
+                        unitPrefab, this, spawnPoint, TeamType.TEAM_1
                     ));
+                }
+                
             }
             
             OnSpawned?.Invoke(unitInstance);

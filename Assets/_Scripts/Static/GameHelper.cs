@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Scripts.Enums;
 using UnityEngine;
 
 namespace _Scripts.Static
@@ -29,6 +30,24 @@ namespace _Scripts.Static
                 }
             }
         }
+
+        private static TeamType[] _playableTeams = 
+        {
+            TeamType.TEAM_1,
+            TeamType.TEAM_2,
+            TeamType.TEAM_3,
+            TeamType.TEAM_4,
+            TeamType.TEAM_5,
+            TeamType.TEAM_6,
+            TeamType.TEAM_7,
+            TeamType.TEAM_8,
+            TeamType.TEAM_9,
+            TeamType.TEAM_10,
+            TeamType.TEAM_11,
+            TeamType.TEAM_12
+        };
+
+        public static IReadOnlyCollection<TeamType> PlayableTeamTypes => _playableTeams;
 
         // *** EXTENSIONS ***
         private static System.Random rng = new System.Random();  

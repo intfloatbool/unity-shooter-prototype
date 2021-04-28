@@ -11,6 +11,7 @@ namespace _Scripts
         [SerializeField] private UnitSpawner _unitSpawner;
 
         private LinkedList<BattleUnit> _aliveUnits;
+        public IReadOnlyCollection<BattleUnit> AliveUnits => _aliveUnits;
         
 #if UNITY_EDITOR
         [Space]

@@ -56,8 +56,11 @@ namespace _Scripts.Battle
                 return;
 
             // check friendly-fire
-            if (hitData.unitSource.TeamController.IsTeammate(_teamController))
-                return;
+            if (hitData.unitSource != null && hitData.unitSource.TeamController != null)
+            {
+                if (hitData.unitSource.TeamController.IsTeammate(_teamController))
+                    return;
+            }
             
             var lastHp = _currentAliveData.CurrentHp;
             var damage = hitData.damage;

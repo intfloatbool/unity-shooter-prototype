@@ -1,4 +1,5 @@
-﻿using _Scripts.Battle;
+﻿using System;
+using _Scripts.Battle;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -14,6 +15,8 @@ namespace _Scripts
         [Space]
         [SerializeField] private BattleUnit[] _unitPrefabsToSpawn;
 
+        public event Action OnAllUnitsSpawned; 
+
         private void Start()
         {
             Assert.IsNotNull(_spawner, "_spawner != null");
@@ -25,6 +28,8 @@ namespace _Scripts
                     _spawner.Spawn(unitPrefab);
                 }        
             }
+            
+            OnAllUnitsSpawned?.Invoke();
         }
     }
 }

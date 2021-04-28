@@ -21,3 +21,19 @@ MonoBehaviour:
     Color: {r: 0.3718593, g: 1, b: 0, a: 1}
   - TeamType: 40
     Color: {r: 1, g: 0, b: 0.94516706, a: 1}
+  - TeamType: 50
+    Color: {r: 0, g: 0.8448343, b: 1, a: 1}
+  - TeamType: 60
+    Color: {r: 1, g: 0.92309815, b: 0, a: 1}
+  - TeamType: 70
+    Color: {r: 0.5377358, g: 0, b: 0.14009143, a: 1}
+  - TeamType: 80
+    Color: {r: 0, g: 0.41509432, b: 0.07399426, a: 1}
+  - TeamType: 90
+    Color: {r: 0.08254716, g: 0.12463289, b: 0.5, a: 1}
+  - TeamType: 100
+    Color: {r: 1, g: 1, b: 1, a: 1}
+  - TeamType: 110
+    Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+  - TeamType: 120
+    Color: {r: 0.5377358, g: 0.34242612, b: 0.41489267, a: 1}
