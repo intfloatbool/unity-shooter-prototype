@@ -10,20 +10,23 @@ namespace _Scripts.Battle
     public class HittableObject : MonoBehaviour
     {
         [SerializeField] private HittableParams _hittableParams;
-
+        [SerializeField] private TeamController _teamController;
+        
         [Space]
         [SerializeField] private UnityEvent _onDeadUnityEv;
         
         [Space]
         [Header("Runtime")]
         [SerializeField] private AliveData _currentAliveData;
-
+        
+        
         public event Action<AliveData, HitData> OnDamaged;
         public event Action OnDied; 
         
         private void Awake()
         {
             Assert.IsNotNull(_hittableParams, "_hittableParams != null");
+            Assert.IsNotNull(_teamController, "_teamController != null");
 
             _currentAliveData = new AliveData(
                 _hittableParams.MaxHp,
@@ -52,6 +55,10 @@ namespace _Scripts.Battle
             if (_currentAliveData.IsDead)
                 return;
 
+            // check friendly-fire
+            if (hitData.unitSource.TeamController.IsTeammate(_teamController))
+                return;
+            
             var lastHp = _currentAliveData.CurrentHp;
             var damage = hitData.damage;
 

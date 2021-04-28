@@ -2049,6 +2049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hittableParams: {fileID: 11400000, guid: dbeb28c6a3af67146b520d3bfa13b077, type: 2}
+  _teamController: {fileID: 2077289040359828827}
   _onDeadUnityEv:
     m_PersistentCalls:
       m_Calls: []
@@ -3682,7 +3683,6 @@ MonoBehaviour:
   _spriteRenderers:
   - {fileID: 1377850641631407144}
   - {fileID: 3619684279180078213}
-  _defaultTeam: 10
 --- !u!1 &6799938430530087917
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,5 +28,13 @@ namespace _Scripts
 
             return _teamType == anotherUnit.TeamController.TeamType;
         }
+        
+        public bool IsTeammate(TeamController teamController)
+        {
+            if (teamController == null)
+                return false;
+
+            return _teamType == teamController.TeamType;
+        }
     }
 }
