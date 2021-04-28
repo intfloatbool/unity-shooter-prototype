@@ -105,7 +105,8 @@ namespace _Scripts.Battle.Weapons
             for (int i = 0; i < _weaponParams.projectilesPerShot; i++)
             {
                 if (Physics.Raycast(_muzzleAnchor.transform.position,
-                    _muzzleAnchor.forward, out RaycastHit hit, Mathf.Infinity))
+                    _muzzleAnchor.forward, out RaycastHit hit, Mathf.Infinity, 
+                    _weaponParams.HitLayer))
                 {
                     if (hit.collider.TryGetComponent(out HittableObject hittableObject))
                     {

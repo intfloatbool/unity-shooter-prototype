@@ -7,6 +7,9 @@ namespace _Scripts.Settings
     [CreateAssetMenu(fileName = "WeaponParams", menuName = "BattleSettings/WeaponParams")]
     public class WeaponParams : ScriptableObject
     {
+        [SerializeField] private LayerMask _hitLayer;
+        public LayerMask HitLayer => _hitLayer;
+
         [SerializeField] private GameObject _projectilePrefab;
 
         public GameObject ProjectilePrefab
