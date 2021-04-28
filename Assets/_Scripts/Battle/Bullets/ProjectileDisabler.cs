@@ -4,6 +4,7 @@ namespace _Scripts.Battle.Bullets
 {
     public class ProjectileDisabler : MonoBehaviour
     {
+        [SerializeField] private LayerMask _layerMask;
         [SerializeField] private float _disableTime = 6f;
         [SerializeField] private float _collisionRadius = 0.2f;
 
@@ -20,7 +21,7 @@ namespace _Scripts.Battle.Bullets
 
         private void Update()
         {
-            if (Physics.CheckSphere(transform.position, _collisionRadius))
+            if (Physics.CheckSphere(transform.position, _collisionRadius, _layerMask))
             {
                 gameObject.SetActive(false);
             }

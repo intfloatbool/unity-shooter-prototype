@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 157234903}
   - component: {fileID: 157234902}
   - component: {fileID: 157234901}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: wall_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3210,7 +3210,7 @@ GameObject:
   - component: {fileID: 1016082852}
   - component: {fileID: 1016082851}
   - component: {fileID: 1016082850}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: wall_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6864,7 +6864,7 @@ MonoBehaviour:
   cullingLayer:
     serializedVersion: 2
     m_Bits: 1
-  lockCamera: 1
+  lockCamera: 0
   rightOffset: 0
   defaultDistance: 3.36
   height: 2.02
