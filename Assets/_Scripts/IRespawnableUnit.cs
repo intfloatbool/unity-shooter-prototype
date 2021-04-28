@@ -4,6 +4,6 @@ namespace _Scripts
 {
     public interface IRespawnableUnit
     {
-        void InitRespawnBehaviour(UnitSpawner spawner, BattleUnit originalPrefab);
+        void InitRespawnBehaviour(UnitSpawnData unitSpawnData);
     }
 }
