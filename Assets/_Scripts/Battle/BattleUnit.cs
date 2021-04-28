@@ -1,5 +1,6 @@
 ﻿using _Scripts.Battle.Weapons;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace _Scripts.Battle
 {
@@ -14,6 +15,9 @@ namespace _Scripts.Battle
 
         [SerializeField] private HittableObject _hittableObject;
         public HittableObject HittableObject => _hittableObject;
+
+        [SerializeField] private TeamController _teamController;
+        public TeamController TeamController => _teamController;
         
         private void OnValidate()
         {
@@ -26,6 +30,11 @@ namespace _Scripts.Battle
             {
                 _hittableObject = GetComponentInChildren<HittableObject>();
             }
+            
+            if (_teamController == null)
+            {
+                _teamController = GetComponentInChildren<TeamController>();
+            }
         }
 
         private void Awake()
@@ -34,6 +43,10 @@ namespace _Scripts.Battle
             {
                 _weaponController = FindObjectOfType<NullWeaponController>();
             }
+            
+            Assert.IsNotNull(_weaponController, "_weaponController != null");
+            Assert.IsNotNull(_hittableObject, "_hittableObject != null");
+            Assert.IsNotNull(_teamController, "_teamController != null");
             
             InitOwnerableChilds();
         }
