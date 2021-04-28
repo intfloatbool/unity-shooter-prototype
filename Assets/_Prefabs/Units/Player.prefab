@@ -2053,6 +2053,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _currentAliveData:
+    _maxHp: 0
     _currentHp: 0
     _isDead: 0
 --- !u!114 &1784832639353671288
@@ -2081,7 +2082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9885f6238f261124780b73f082974b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _teamType: 0
+  _teamType: 30
 --- !u!1 &3518631735502510394
 GameObject:
   m_ObjectHideFlags: 0

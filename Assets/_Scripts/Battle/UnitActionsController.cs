@@ -71,6 +71,11 @@ namespace _Scripts.Battle
             {
                 _commandInvoker.RunCommand(_selfKillCommand);
             }
+            
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                _commandInvoker.RunCommand(new SelfDamageCommand(_battleUnit, 15));
+            }
         }
     }
 }

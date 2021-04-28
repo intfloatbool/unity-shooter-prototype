@@ -1,4 +1,6 @@
-﻿using _Scripts.Battle;
+﻿using System;
+using System.Linq;
+using _Scripts.Battle;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -7,11 +9,18 @@ namespace _Scripts
     public class LocalPlayerSetupper : MonoBehaviour
     {
         [SerializeField] private UnitSpawner _unitSpawner;
+        [SerializeField] private TeamChangerListenerBase[] _teamChangerListeners;
         private IOwnerable[] _localOwnerable;
         
         private bool _isLocalPlayerSpawned;
 
         private BattleUnit _lastLocalPlayer;
+
+        private void OnValidate()
+        {
+            if(!_teamChangerListeners.Any())
+                _teamChangerListeners = GetComponentsInChildren<TeamChangerListenerBase>();
+        }
 
         private void Awake()
         {
@@ -51,6 +60,11 @@ namespace _Scripts
             foreach (var ownerable in _localOwnerable)
             {
                 ownerable.InitOwner(unit);
+            }
+
+            foreach (var teamChangerListener in _teamChangerListeners)
+            {
+                teamChangerListener.UpdateTeamChanger(unit.TeamController);
             }
             
             _isLocalPlayerSpawned = true;

@@ -72,6 +72,14 @@ namespace _Scripts.Battle
                 OnDied?.Invoke();
             }
         }
+
+        public void SelfDamage(int dmg)
+        {
+            DealDamage(new HitData(
+                null, 
+                null,
+                dmg));
+        }
         
     }
 }

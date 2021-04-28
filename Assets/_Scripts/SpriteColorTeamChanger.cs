@@ -10,12 +10,11 @@ namespace _Scripts
 
         [SerializeField] private TeamColorsParams _teamColorsParams;
         [SerializeField] private SpriteRenderer[] _spriteRenderers;
-        [SerializeField] private TeamType _defaultTeam;
 
         protected override void Awake()
         {
             Assert.IsNotNull(_teamColorsParams, "_teamColorsParams != null");
-            TeamControllerOnTeamChanged(_defaultTeam);
+            TeamControllerOnTeamChanged(_teamController.TeamType);
             base.Awake();
         }
 

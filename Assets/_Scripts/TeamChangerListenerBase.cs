@@ -11,8 +11,23 @@ namespace _Scripts
 
         protected virtual void Awake()
         {
-            if(_teamController != null)
+            if (_teamController != null)
+            {
                 _teamController.OnTeamChanged += TeamControllerOnTeamChanged;
+                TeamControllerOnTeamChanged(_teamController.TeamType);
+            }
+        }
+
+        public void UpdateTeamChanger(TeamController teamController)
+        {
+            if(_teamController != null)
+                _teamController.OnTeamChanged -= TeamControllerOnTeamChanged;
+            
+            Assert.IsNotNull(teamController, "teamController != null");
+            _teamController = teamController;
+            _teamController.OnTeamChanged += TeamControllerOnTeamChanged;
+
+            TeamControllerOnTeamChanged(teamController.TeamType);
         }
         
 
