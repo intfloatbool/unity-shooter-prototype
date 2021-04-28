@@ -3677,18 +3677,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teamController: {fileID: 2077289040359828827}
+  _teamColorsParams: {fileID: 11400000, guid: 04542ded5a87df549b53cff39014f91d, type: 2}
   _spriteRenderers:
   - {fileID: 1377850641631407144}
   - {fileID: 3619684279180078213}
-  _colorByTeams:
-  - TeamType: 10
-    Color: {r: 1, g: 0, b: 0, a: 1}
-  - TeamType: 20
-    Color: {r: 0, g: 0.12585497, b: 1, a: 1}
-  - TeamType: 30
-    Color: {r: 0.9427508, g: 1, b: 0, a: 1}
-  - TeamType: 40
-    Color: {r: 1, g: 0, b: 0.8938141, a: 1}
   _defaultTeam: 10
 --- !u!1 &6799938430530087917
 GameObject:

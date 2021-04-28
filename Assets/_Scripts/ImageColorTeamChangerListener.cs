@@ -2,35 +2,31 @@
 using _Scripts.Settings;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 namespace _Scripts
 {
-    public class SpriteColorTeamChanger : TeamChangerListenerBase
+    public class ImageColorTeamChangerListener : TeamChangerListenerBase
     {
-
         [SerializeField] private TeamColorsParams _teamColorsParams;
-        [SerializeField] private SpriteRenderer[] _spriteRenderers;
-        [SerializeField] private TeamType _defaultTeam;
+        [SerializeField] private Image[] _images;
 
         protected override void Awake()
         {
             Assert.IsNotNull(_teamColorsParams, "_teamColorsParams != null");
-            TeamControllerOnTeamChanged(_defaultTeam);
             base.Awake();
         }
 
         protected override void TeamControllerOnTeamChanged(TeamType teamType)
         {
-            var colorByTeam = _teamColorsParams.GetColorByTeam(teamType);
-            foreach (var spriteRend in _spriteRenderers)
+            var color = _teamColorsParams.GetColorByTeam(teamType).Color;
+            foreach (var img in _images)
             {
-                if (spriteRend != null)
+                if (img != null)
                 {
-                    spriteRend.color = colorByTeam.Color;
+                    img.color = color;
                 }
             }
         }
-
-        
     }
 }
