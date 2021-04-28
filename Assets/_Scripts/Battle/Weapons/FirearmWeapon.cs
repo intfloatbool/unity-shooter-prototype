@@ -63,8 +63,7 @@ namespace _Scripts.Battle.Weapons
             
             if (_isOnReloadProcess)
                 return;
-
-            Debug.Log($"{name} shot!");
+            
             _isReadyToShot = false;
 
             _currentMagazine -= _weaponParams.projectilesPerShot;

@@ -11,10 +11,10 @@ namespace _Scripts
 
         protected virtual void Awake()
         {
-            Assert.IsNotNull(_teamController, "_teamController != null");
-            
-            _teamController.OnTeamChanged += TeamControllerOnTeamChanged;
+            if(_teamController != null)
+                _teamController.OnTeamChanged += TeamControllerOnTeamChanged;
         }
+        
 
         protected virtual void OnDestroy()
         {
