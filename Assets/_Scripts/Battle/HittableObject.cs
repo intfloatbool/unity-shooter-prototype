@@ -31,6 +31,20 @@ namespace _Scripts.Battle
             );
         }
 
+        public void Kill()
+        {
+            if (_currentAliveData.IsDead)
+                return;
+            
+            _currentAliveData = new AliveData(
+                0,
+                true
+            );
+            
+            _onDeadUnityEv?.Invoke();
+            OnDied?.Invoke();
+        }
+
         public void DealDamage(HitData hitData)
         {
             if (_currentAliveData.IsDead)

@@ -1847,6 +1847,7 @@ GameObject:
   - component: {fileID: 3518631735449087093}
   - component: {fileID: 3518631735449087092}
   - component: {fileID: 3518631735449087095}
+  - component: {fileID: 1784832639353671288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2051,6 +2052,20 @@ MonoBehaviour:
   _currentAliveData:
     _currentHp: 0
     _isDead: 0
+--- !u!114 &1784832639353671288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3518631735449087113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd58051c2a0b27a43b913fdb7990cc4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _battleUnit: {fileID: 3518631735449087112}
+  _hittableObject: {fileID: 3518631735449087095}
 --- !u!1 &3518631735502510394
 GameObject:
   m_ObjectHideFlags: 0

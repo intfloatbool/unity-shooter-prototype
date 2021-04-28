@@ -14,6 +14,7 @@ namespace _Scripts.Battle
         private UnitCommandBase _shotCommand;
         private UnitCommandBase _swapWeaponsCommand;
         private UnitCommandBase _reloadWeaponCommand;
+        private UnitCommandBase _selfKillCommand;
 
         private void OnValidate()
         {
@@ -41,6 +42,7 @@ namespace _Scripts.Battle
             _shotCommand = new UseWeaponCommand(_battleUnit);
             _swapWeaponsCommand = new SwapWeaponsCommand(_battleUnit);
             _reloadWeaponCommand = new ReloadWeaponCommand(_battleUnit);
+            _selfKillCommand = new SelfKillCommand(_battleUnit);
         }
 
         private void Update()
@@ -63,6 +65,11 @@ namespace _Scripts.Battle
             if (Input.GetKeyDown(KeyCode.R))
             {
                 _commandInvoker.RunCommand(_reloadWeaponCommand);
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                _commandInvoker.RunCommand(_selfKillCommand);
             }
         }
     }

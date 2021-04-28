@@ -11,6 +11,8 @@ namespace _Scripts
         
         private bool _isLocalPlayerSpawned;
 
+        private BattleUnit _lastLocalPlayer;
+
         private void Awake()
         {
             Assert.IsNotNull(_unitSpawner, "_unitSpawner != null");
@@ -36,6 +38,15 @@ namespace _Scripts
                 Debug.LogError($"Some local player already spawned!" );
                 return;
             }
+            
+            if (_lastLocalPlayer != null)
+            {
+                _lastLocalPlayer.HittableObject.OnDied -= HittableObjectOnDied;
+            }
+            
+            unit.HittableObject.OnDied += HittableObjectOnDied;
+            _lastLocalPlayer = unit;
+            
 
             foreach (var ownerable in _localOwnerable)
             {
@@ -43,6 +54,11 @@ namespace _Scripts
             }
             
             _isLocalPlayerSpawned = true;
+        }
+
+        private void HittableObjectOnDied()
+        {
+            _isLocalPlayerSpawned = false;
         }
     }
 }
