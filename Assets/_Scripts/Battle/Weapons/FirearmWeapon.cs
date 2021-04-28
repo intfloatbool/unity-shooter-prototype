@@ -89,27 +89,35 @@ namespace _Scripts.Battle.Weapons
             if (projectilePrefab == null)
                 return;
 
+            Vector3 posToSpawn = _muzzleAnchor.transform.position;
+            Vector3 currentOffset = _weaponParams.projectilesOffset;
             for (int i = 0; i < _weaponParams.projectilesPerShot; i++)
             {
                 var projectile = GetProjectile(projectilePrefab);
-                projectile.transform.position = _muzzleAnchor.transform.position;
+                projectile.transform.position = posToSpawn;
                 projectile.transform.rotation = _muzzleAnchor.transform.rotation;
+
+                posToSpawn += (currentOffset * (i + 1));
             }
         }
 
         private void DetectHittable()
         {
-            if (Physics.Raycast(_muzzleAnchor.transform.position,
-                _muzzleAnchor.forward, out RaycastHit hit, Mathf.Infinity))
+            for (int i = 0; i < _weaponParams.projectilesPerShot; i++)
             {
-                if (hit.collider.TryGetComponent(out HittableObject hittableObject))
+                if (Physics.Raycast(_muzzleAnchor.transform.position,
+                    _muzzleAnchor.forward, out RaycastHit hit, Mathf.Infinity))
                 {
-                    if (_lastHitData != null)
-                        hittableObject.DealDamage(
-                            _lastHitData.Value
-                        );
+                    if (hit.collider.TryGetComponent(out HittableObject hittableObject))
+                    {
+                        if (_lastHitData != null)
+                            hittableObject.DealDamage(
+                                _lastHitData.Value
+                            );
+                    }
                 }
             }
+            
         }
 
         private GameObject GetProjectile(GameObject prefab)

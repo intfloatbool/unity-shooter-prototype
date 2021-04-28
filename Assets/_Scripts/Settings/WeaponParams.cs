@@ -41,6 +41,9 @@ namespace _Scripts.Settings
         [SerializeField] private int _projectilesPerShot;
         public int projectilesPerShot => _projectilesPerShot;
 
+        [SerializeField] private Vector3 _projectilesOffset;
+        public Vector3 projectilesOffset => _projectilesOffset;
+
         [SerializeField] private Sprite _spriteIcon;
         public Sprite spriteIcon => _spriteIcon;
     }

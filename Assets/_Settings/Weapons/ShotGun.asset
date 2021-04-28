@@ -21,4 +21,5 @@ MonoBehaviour:
     _minDamage: 25
     _maxDamage: 40
   _projectilesPerShot: 2
+  _projectilesOffset: {x: 0, y: 0, z: 0.5}
   _spriteIcon: {fileID: 21300000, guid: 92144fb0da9a91b44a727db6ae783c01, type: 3}
