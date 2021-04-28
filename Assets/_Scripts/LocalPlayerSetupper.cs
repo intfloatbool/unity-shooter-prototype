@@ -17,16 +17,16 @@ namespace _Scripts
 
             _localOwnerable = GetComponentsInChildren<IOwnerable>(true);
 
-            _unitSpawner.OnUnitSpawned += UnitSpawnerOnUnitSpawned;
+            _unitSpawner.OnSpawned += SpawnerOnSpawned;
         }
 
         private void OnDestroy()
         {
             if (_unitSpawner != null)
-                _unitSpawner.OnUnitSpawned -= UnitSpawnerOnUnitSpawned;
+                _unitSpawner.OnSpawned -= SpawnerOnSpawned;
         }
 
-        private void UnitSpawnerOnUnitSpawned(BattleUnit unit)
+        private void SpawnerOnSpawned(BattleUnit unit)
         {
             if (!unit.IsLocalPlayer)
                 return;

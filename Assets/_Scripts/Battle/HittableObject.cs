@@ -52,8 +52,6 @@ namespace _Scripts.Battle
                 _onDeadUnityEv?.Invoke();
                 OnDied?.Invoke();
             }
-            
-            Debug.Log($"{name} damaged of {hitData.damage} by {hitData.unitSource.name} with weapon {hitData.weaponSource.name}!");
         }
         
     }

@@ -32,16 +32,16 @@ namespace _Scripts
 
             _aliveUnits = new LinkedList<BattleUnit>();
             
-            _unitSpawner.OnUnitSpawned += UnitSpawnerOnUnitSpawned;
+            _unitSpawner.OnSpawned += SpawnerOnSpawned;
         }
 
         private void OnDestroy()
         {
             if(_unitSpawner != null)
-                _unitSpawner.OnUnitSpawned -= UnitSpawnerOnUnitSpawned;
+                _unitSpawner.OnSpawned -= SpawnerOnSpawned;
         }
 
-        private void UnitSpawnerOnUnitSpawned(BattleUnit battleUnit)
+        private void SpawnerOnSpawned(BattleUnit battleUnit)
         {
             Assert.IsNotNull(battleUnit, "battleUnit != null");
             if (battleUnit.HittableObject != null)

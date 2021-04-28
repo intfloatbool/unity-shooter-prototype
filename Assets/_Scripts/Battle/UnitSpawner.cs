@@ -14,7 +14,7 @@ namespace _Scripts.Battle
         [SerializeField] private bool _isExcludeSpawnPoints = true;
         
         private LinkedList<SpawnPoint> _spawnPointList;
-        public event Action<BattleUnit> OnUnitSpawned;
+        public event Action<BattleUnit> OnSpawned;
 
         private void OnValidate()
         {
@@ -27,7 +27,7 @@ namespace _Scripts.Battle
             Assert.IsTrue(_spawnPoints.All(sp => sp != null), "_spawnPoints.All(sp => sp != null)");
         }
 
-        public void SpawnUnit(BattleUnit unitPrefab)
+        public void Spawn(BattleUnit unitPrefab)
         {
             Vector3 spawnPosition = Vector3.zero;
             if (_isExcludeSpawnPoints)
@@ -58,8 +58,14 @@ namespace _Scripts.Battle
 
             var unitInstance = Instantiate(unitPrefab);
             unitInstance.transform.position = spawnPosition;
+
+            var respawnableUnit = unitInstance.GetComponentInChildren<IRespawnableUnit>(true);
+            if (respawnableUnit != null)
+            {
+                respawnableUnit.InitRespawnBehaviour(this, unitPrefab);
+            }
             
-            OnUnitSpawned?.Invoke(unitInstance);
+            OnSpawned?.Invoke(unitInstance);
         }
     }
 }

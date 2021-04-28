@@ -22,7 +22,7 @@ namespace _Scripts
             {
                 if (unitPrefab != null)
                 {
-                    _spawner.SpawnUnit(unitPrefab);
+                    _spawner.Spawn(unitPrefab);
                 }        
             }
         }
