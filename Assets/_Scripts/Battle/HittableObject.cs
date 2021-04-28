@@ -27,6 +27,7 @@ namespace _Scripts.Battle
 
             _currentAliveData = new AliveData(
                 _hittableParams.MaxHp,
+                _hittableParams.MaxHp,
                 false
             );
         }
@@ -37,6 +38,7 @@ namespace _Scripts.Battle
                 return;
             
             _currentAliveData = new AliveData(
+                _hittableParams.MaxHp,
                 0,
                 true
             );
@@ -57,9 +59,12 @@ namespace _Scripts.Battle
             currentHp = Mathf.Clamp(currentHp, 0, _hittableParams.MaxHp);
             bool isDead = currentHp <= 0;
             _currentAliveData = new AliveData(
+                _hittableParams.MaxHp,
                 currentHp,
                 isDead
             );
+            
+            OnDamaged?.Invoke(_currentAliveData, hitData);
             
             if (isDead)
             {

@@ -1235,6 +1235,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _currentAliveData:
+    _maxHp: 0
     _currentHp: 0
     _isDead: 0
 --- !u!114 &8041964967009550579
@@ -3812,6 +3813,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5807941349592592543}
   - component: {fileID: 1972112369638451686}
+  - component: {fileID: 7750926527381205263}
   m_Layer: 0
   m_Name: HP_BAR
   m_TagString: Untagged
@@ -3855,6 +3857,19 @@ MonoBehaviour:
   _teamColorsParams: {fileID: 11400000, guid: 04542ded5a87df549b53cff39014f91d, type: 2}
   _images:
   - {fileID: 7804495315944149084}
+--- !u!114 &7750926527381205263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4112653985214579710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b67c24760d16e744a89f29e098c750f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fillImg: {fileID: 7804495315944149084}
 --- !u!1 &4372783463927944542
 GameObject:
   m_ObjectHideFlags: 0
