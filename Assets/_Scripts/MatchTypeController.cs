@@ -36,6 +36,21 @@ namespace _Scripts
             }
         }
 
+        public void SetMatchTypeToTDM()
+        {
+            SetCurrentMatchType(MatchType.TEAM_DEATHMATCH);
+        }
+        
+        public void SetMatchTypeToFFA()
+        {
+            SetCurrentMatchType(MatchType.FREE_FOR_ALL);
+        }
+        
+        public void SetCurrentMatchType(MatchType matchType)
+        {
+            this._currentMatchType = matchType;
+        }
+        
         private void SpawnCallerOnAllUnitsSpawned()
         {
             InitTeams(_currentMatchType);
@@ -71,8 +86,7 @@ namespace _Scripts
                 
                 counter++;
             }
-            
-            
+
         }
     }
 }

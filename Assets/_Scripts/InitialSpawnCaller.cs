@@ -20,7 +20,10 @@ namespace _Scripts
         private void Start()
         {
             Assert.IsNotNull(_spawner, "_spawner != null");
-            
+        }
+
+        public void StartFillingRoom()
+        {
             foreach (var unitPrefab in _unitPrefabsToSpawn)
             {
                 if (unitPrefab != null)
