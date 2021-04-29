@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace _Scripts.Settings
 {
-    [CreateAssetMenu(fileName = "SlowModiferSettings", menuName = "BattleSettings/SlowModiferSettings", order = 0)]
-    public class SlowModiferSettings : ScriptableObject
+    [CreateAssetMenu(fileName = "ShotSlowModiferSettings", menuName = "BattleSettings/ShotSlowModiferSettings", order = 0)]
+    public class ShotSlowModiferSettings : ScriptableObject
     {
         [System.Serializable]
         private struct SpeedMultiplerByWeaponType
@@ -17,6 +17,9 @@ namespace _Scripts.Settings
             public WeaponType WeaponType => _weaponType;
         }
 
+        [SerializeField] private float _slowTime = 0.6f;
+        public float slowTime => _slowTime;
+        
         [SerializeField] private SpeedMultiplerByWeaponType[] _speedMultiplerCollection;
 
         public float GetSpeedMultiplerByWeaponType(WeaponType weaponType)

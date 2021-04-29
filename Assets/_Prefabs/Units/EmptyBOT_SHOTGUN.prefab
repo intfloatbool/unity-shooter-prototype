@@ -1132,7 +1132,8 @@ GameObject:
   - component: {fileID: 2106810889404557286}
   - component: {fileID: 4837920818863780791}
   - component: {fileID: 4227948338514078302}
-  - component: {fileID: -2626115961901097272}
+  - component: {fileID: 9094437749300551536}
+  - component: {fileID: -606080752615269440}
   m_Layer: 8
   m_Name: EmptyBOT_SHOTGUN
   m_TagString: Untagged
@@ -1156,6 +1157,7 @@ Transform:
   - {fileID: 170623147325492175}
   - {fileID: 1543360135756702918}
   - {fileID: 2194062497251564207}
+  - {fileID: 6064581691700232678}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1328,7 +1330,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-2626115961901097272
+--- !u!114 &9094437749300551536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1337,7 +1339,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 170623147008066842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0788d82a46034004b09b03fcc026515a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fa6c039a3674919a0211e78674747ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultSpeedMultipler: 1
+  _currentSpeedMultipler: 1
+  _navMeshAgent: {fileID: 4227948338514078302}
+--- !u!114 &-606080752615269440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170623147008066842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb434d440f941f7907ca83f58eed45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _battleUnit: {fileID: 170623147008066847}
@@ -4200,6 +4217,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6947618505181616482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6064581691700232678}
+  m_Layer: 8
+  m_Name: Modifiers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6064581691700232678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6947618505181616482}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4135550953913132309}
+  m_Father: {fileID: 170623147008066915}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7289213268924364328
 GameObject:
   m_ObjectHideFlags: 0
@@ -4247,6 +4295,52 @@ MonoBehaviour:
   _worldUp: {x: 0, y: 1, z: 0}
   _specificCamera: {fileID: 0}
   _camera: {fileID: 0}
+--- !u!1 &8236279273780117438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4135550953913132309}
+  - component: {fileID: 7886225563015478466}
+  m_Layer: 8
+  m_Name: ShotSlowModifer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4135550953913132309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236279273780117438}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6064581691700232678}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7886225563015478466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8236279273780117438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29aa930d1bb42e79afc461284a10abb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotSlowModiferSettings: {fileID: 11400000, guid: edc818f7d1d69df4698b02c325e31837, type: 2}
+  _battleUnit: {fileID: 170623147008066847}
+  _unitSpeedController: {fileID: 9094437749300551536}
 --- !u!1 &9075937094197754297
 GameObject:
   m_ObjectHideFlags: 0

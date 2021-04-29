@@ -1,20 +1,18 @@
-﻿using _Scripts.Battle.Weapons;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using _Scripts.Battle.Base;
+using _Scripts.Battle.Weapons;
+using _Scripts.Static;
 
 namespace _Scripts.Battle.Setupable
 {
-    public class BotPlayerCharacterSettingsAccepter : CharacterSettingsAccepterBase
+    public class DefaultUnitCharacterSettingsAccepter : CharacterSettingsAccepterBase
     {
         public override void AcceptSettings()
         {
-            if (_battleUnit.TryGetComponent(out NavMeshAgent navMeshAgent))
+            var speedController = GetComponentInChildren<UnitSpeedControllerBase>();
+            GameHelper.CheckForNull(speedController);
+            if (speedController != null)
             {
-                navMeshAgent.speed *= _characterSettings.moveSpeedMultipler;
-            }
-            else
-            {
-                Debug.LogError($"{nameof(NavMeshAgent)} is missing!");
+                speedController.SetDefaultSpeedMultipler(_characterSettings.moveSpeedMultipler);
             }
 
             _battleUnit.WeaponController.DamageMultipler = _characterSettings.damageDealingMultipler;
