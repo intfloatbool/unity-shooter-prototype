@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using _Scripts.Battle;
+using _Scripts.Static;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -68,11 +69,15 @@ namespace _Scripts
             }
             
             _isLocalPlayerSpawned = true;
+            
+            GameHelper.SetActiveCursor(false);
         }
 
         private void HittableObjectOnDied()
         {
             _isLocalPlayerSpawned = false;
+            
+            GameHelper.SetActiveCursor(true);
         }
     }
 }

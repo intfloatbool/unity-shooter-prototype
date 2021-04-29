@@ -49,6 +49,12 @@ namespace _Scripts.Static
 
         public static IReadOnlyCollection<TeamType> PlayableTeamTypes => _playableTeams;
 
+
+        public static void SetActiveCursor(bool isActive)
+        {
+            Cursor.visible = isActive;
+        }
+
         // *** EXTENSIONS ***
         private static System.Random rng = new System.Random();  
         public static void Shuffle<T>(this IList<T> list)  
