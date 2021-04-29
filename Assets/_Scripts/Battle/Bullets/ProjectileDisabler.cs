@@ -23,6 +23,7 @@ namespace _Scripts.Battle.Bullets
         {
             if (Physics.CheckSphere(transform.position, _collisionRadius, _layerMask))
             {
+                CancelInvoke(nameof(DisableOnTime));
                 gameObject.SetActive(false);
             }
         }
