@@ -50,9 +50,14 @@ namespace _Scripts.Static
         public static IReadOnlyCollection<TeamType> PlayableTeamTypes => _playableTeams;
 
 
-        public static void SetActiveCursor(bool isActive)
+        public static void SetActiveCursor(bool isActive, bool? isLockCursor = null)
         {
             Cursor.visible = isActive;
+
+            if (isLockCursor.HasValue)
+            {
+                Cursor.lockState = isLockCursor.Value ? CursorLockMode.Locked : CursorLockMode.None;
+            }
         }
 
         // *** EXTENSIONS ***

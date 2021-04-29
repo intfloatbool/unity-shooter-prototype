@@ -70,14 +70,14 @@ namespace _Scripts
             
             _isLocalPlayerSpawned = true;
             
-            GameHelper.SetActiveCursor(false);
+            GameHelper.SetActiveCursor(false, true);
         }
 
         private void HittableObjectOnDied()
         {
             _isLocalPlayerSpawned = false;
             
-            GameHelper.SetActiveCursor(true);
+            GameHelper.SetActiveCursor(true, false);
         }
     }
 }
