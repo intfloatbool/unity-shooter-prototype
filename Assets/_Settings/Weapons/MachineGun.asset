@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   _projectilePrefab: {fileID: 71271426772617923, guid: fef299d8130438e41af55e5ba8c98e9b, type: 3}
   _magazineAmount: 30
   _nameId: AK47
