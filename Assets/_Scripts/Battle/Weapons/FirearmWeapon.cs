@@ -22,6 +22,7 @@ namespace _Scripts.Battle.Weapons
         [SerializeField] private bool _isReadyToShot;
         [SerializeField] private bool _isReloadRequired;
         [SerializeField] private bool _isOnReloadProcess;
+        public bool IsOnReloadProecess => _isOnReloadProcess;
         
         private float _reloadTimer;
         private float _shotDelayTimer;
@@ -118,6 +119,17 @@ namespace _Scripts.Battle.Weapons
                 }
             }
             
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var pooled in _projectilesPool)
+            {
+                if (pooled != null)
+                {
+                    Destroy(pooled);
+                }
+            }
         }
 
         private GameObject GetProjectile(GameObject prefab)

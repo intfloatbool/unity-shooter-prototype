@@ -19,6 +19,8 @@ namespace _Scripts.Battle
         [SerializeField] private TeamController _teamController;
         public TeamController TeamController => _teamController;
         
+        public BattleResources? BattleResources { get; set; }
+        
         private void OnValidate()
         {
             if (_weaponController == null)

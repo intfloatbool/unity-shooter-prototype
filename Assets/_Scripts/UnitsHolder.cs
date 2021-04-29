@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Battle;
+using _Scripts.Enums;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -12,6 +14,8 @@ namespace _Scripts
 
         private LinkedList<BattleUnit> _aliveUnits;
         public IReadOnlyCollection<BattleUnit> AliveUnits => _aliveUnits;
+
+        public BattleUnit[] AliveUnitsBuffer { get; private set; }
         
 #if UNITY_EDITOR
         [Space]
@@ -32,8 +36,13 @@ namespace _Scripts
             Assert.IsNotNull(_unitSpawner, "_unitSpawner != null");
 
             _aliveUnits = new LinkedList<BattleUnit>();
+
+            var teamAmount = Enum.GetNames(typeof(TeamType)).Length;
+            AliveUnitsBuffer = new BattleUnit[teamAmount];
             
             _unitSpawner.OnSpawned += SpawnerOnSpawned;
+            
+            
         }
 
         private void OnDestroy()
@@ -55,6 +64,24 @@ namespace _Scripts
             }
             _aliveUnits.AddLast(battleUnit);
             UpdateDebugEditorList();
+            UpdateUnitsBuffer();
+        }
+
+
+        private void UpdateUnitsBuffer()
+        {
+            int counter = 0;
+            foreach (var aliveUnit in _aliveUnits)
+            {
+                if (counter > AliveUnitsBuffer.Length - 1)
+                {
+                    break;
+                }
+
+                AliveUnitsBuffer[counter] = aliveUnit;
+                
+                counter++;
+            }
         }
 
         private void UpdateDebugEditorList()

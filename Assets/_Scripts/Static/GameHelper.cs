@@ -60,6 +60,14 @@ namespace _Scripts.Static
             }
         }
 
+        public static void CheckForNull<T>(T target) where T : class
+        {
+            if (target == null)
+            {
+                Debug.LogError($"{typeof(T).FullName} is null!");
+            }
+        }
+
         // *** EXTENSIONS ***
         private static System.Random rng = new System.Random();  
         public static void Shuffle<T>(this IList<T> list)  

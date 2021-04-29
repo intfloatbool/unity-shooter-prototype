@@ -25,9 +25,20 @@ namespace _Scripts.Battle
             this.TeamType = teamType;
         }
     }
+
+    public struct BattleResources
+    {
+        public readonly UnitsHolder UnitsHolder;
+
+        public BattleResources(UnitsHolder unitsHolder)
+        {
+            UnitsHolder = unitsHolder;
+        }
+    }
     
     public class UnitSpawner : MonoBehaviour
     {
+        [SerializeField] private UnitsHolder _unitsHolder;
         [SerializeField] private SpawnPoint[] _spawnPoints;
         [SerializeField] private bool _isExcludeSpawnPoints = true;
         
@@ -41,8 +52,8 @@ namespace _Scripts.Battle
 
         private void Awake()
         {
-            Assert.IsTrue(_spawnPoints.Length > 0, "_spawnPoints.Length > 0");
-            Assert.IsTrue(_spawnPoints.All(sp => sp != null), "_spawnPoints.All(sp => sp != null)");
+            GameHelper.CheckForNull(_unitsHolder);
+            
         }
 
         public void StartRespawnProcess(BattleUnit initiator, UnitSpawnData spawnData, float? specificTime = null)
@@ -139,8 +150,18 @@ namespace _Scripts.Battle
                 }
                 
             }
+
+            InitUnit(unitInstance);
             
             OnSpawned?.Invoke(unitInstance);
+        }
+
+        private void InitUnit(BattleUnit battleUnit)
+        {
+            var battleResources = new BattleResources(
+                _unitsHolder
+            );
+            battleUnit.BattleResources = battleResources;
         }
     }
 }

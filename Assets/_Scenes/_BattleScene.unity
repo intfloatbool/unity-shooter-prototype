@@ -544,9 +544,9 @@ MonoBehaviour:
   _unitPrefabsToSpawn:
   - {fileID: 3518631735449087112, guid: a37d5bcf8292f5340b3d51bc990ac9ff, type: 3}
   - {fileID: 170623147008066847, guid: 49d56a611e1a0c142917816085111e8f, type: 3}
+  - {fileID: 170623147008066847, guid: 67e1073c9540ff340b96976456f8f602, type: 3}
   - {fileID: 170623147008066847, guid: 49d56a611e1a0c142917816085111e8f, type: 3}
-  - {fileID: 170623147008066847, guid: 49d56a611e1a0c142917816085111e8f, type: 3}
-  - {fileID: 170623147008066847, guid: 49d56a611e1a0c142917816085111e8f, type: 3}
+  - {fileID: 170623147008066847, guid: 67e1073c9540ff340b96976456f8f602, type: 3}
   - {fileID: 170623147008066847, guid: 49d56a611e1a0c142917816085111e8f, type: 3}
 --- !u!1 &102327683
 GameObject:
@@ -4125,6 +4125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab5e46040d89c841828e839ccaf77e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unitsHolder: {fileID: 1642409437}
   _spawnPoints:
   - {fileID: 527695049}
   - {fileID: 801862141}
