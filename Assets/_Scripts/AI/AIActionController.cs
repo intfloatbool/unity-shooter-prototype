@@ -2,8 +2,8 @@
 using _Scripts.Battle.Weapons;
 using _Scripts.Settings;
 using _Scripts.Static;
-using Invector.vCharacterController;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace _Scripts.AI
 {
@@ -12,14 +12,14 @@ namespace _Scripts.AI
         [SerializeField] private BattleUnit _battleUnit;
         [SerializeField] private AISettings _aiSettings;
         [SerializeField] private AIStateController _stateController;
-        [SerializeField] private vThirdPersonController _personController;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private Transform _weaponHolderAnchor;
         
         [Space]
         [Header("Runtime")]
         [SerializeField] private AIAction _currentAction;
         [SerializeField] private BattleUnit _closestEnemy;
-        
+
         private UnitsHolder _unitsHolder;
 
 
@@ -30,7 +30,7 @@ namespace _Scripts.AI
             GameHelper.CheckForNull(_stateController);
             GameHelper.CheckForNull(_battleUnit);
             GameHelper.CheckForNull(_aiSettings);
-            GameHelper.CheckForNull(_personController);
+            GameHelper.CheckForNull(_navMeshAgent);
             GameHelper.CheckForNull(_weaponHolderAnchor);
         }
 
@@ -86,6 +86,7 @@ namespace _Scripts.AI
         {
             AiBehaviourLoop();
         }
+        
 
         protected virtual void AiBehaviourLoop()
         {
@@ -109,6 +110,7 @@ namespace _Scripts.AI
             
             if (sqrLen < sqrDistance)
             {
+                Stop();
                 DoAction(AIAction.ATTACK_ENEMY);
             }
             else
@@ -129,22 +131,12 @@ namespace _Scripts.AI
 
         private void Stop()
         {
-            _personController.input = Vector3.zero;
+            _navMeshAgent.SetDestination(_navMeshAgent.transform.position);
         }
 
         private void HandleWalkLoop()
         {
-            //TODO: Fix corrupted moving
-            var offsetFromTarget = _closestEnemy.transform.position - transform.position;
-            var directionToTarget =
-                new Vector3(
-                    Mathf.Clamp(offsetFromTarget.x, -1f, 1f),
-                    Mathf.Clamp(offsetFromTarget.y, -1f, 1f),
-                    Mathf.Clamp(offsetFromTarget.z, -1f, 1f)
-                );
-
-            _personController.input.x = directionToTarget.x;
-            _personController.input.z = directionToTarget.z;
+            _navMeshAgent.SetDestination(_closestEnemy.transform.position);
         }
 
         private void HandleAttackLoop()

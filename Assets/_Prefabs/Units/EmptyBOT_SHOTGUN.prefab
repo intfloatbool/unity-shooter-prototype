@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _possibleWeapons:
-  - {fileID: 0}
+  - {fileID: 4468558414396815435}
   _weapon: {fileID: 0}
 --- !u!1 &170623146605450758
 GameObject:
@@ -1129,9 +1129,9 @@ GameObject:
   - component: {fileID: 170623147008066841}
   - component: {fileID: 8041964967009550579}
   - component: {fileID: 9093202270833199033}
-  - component: {fileID: -6523955846639269566}
   - component: {fileID: 2106810889404557286}
   - component: {fileID: 4837920818863780791}
+  - component: {fileID: 4227948338514078302}
   m_Layer: 8
   m_Name: EmptyBOT_SHOTGUN
   m_TagString: Untagged
@@ -1272,55 +1272,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teamType: 20
---- !u!114 &-6523955846639269566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 170623147008066842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73fbf3aa05f6be24780438449f505aa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useRootMotion: 0
-  rotateByWorld: 0
-  useContinuousSprint: 1
-  sprintOnlyFree: 1
-  locomotionType: 0
-  freeSpeed:
-    movementSmooth: 6
-    animationSmooth: 0.2
-    rotationSpeed: 16
-    walkByDefault: 0
-    rotateWithCamera: 0
-    walkSpeed: 2
-    runningSpeed: 4
-    sprintSpeed: 6
-  strafeSpeed:
-    movementSmooth: 6
-    animationSmooth: 0.2
-    rotationSpeed: 16
-    walkByDefault: 0
-    rotateWithCamera: 0
-    walkSpeed: 2
-    runningSpeed: 4
-    sprintSpeed: 6
-  jumpWithRigidbodyForce: 0
-  jumpAndRotate: 1
-  jumpTimer: 0.3
-  jumpHeight: 4
-  airSpeed: 5
-  airSmooth: 6
-  extraGravity: -10
-  limitFallVelocity: -15
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  groundMinDistance: 0.25
-  groundMaxDistance: 0.5
-  slopeLimit: 75
 --- !u!114 &2106810889404557286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,10 +1301,33 @@ MonoBehaviour:
   _battleUnit: {fileID: 170623147008066847}
   _aiSettings: {fileID: 11400000, guid: 5627f39fa0843b0458c344f8d9ee2ee4, type: 2}
   _stateController: {fileID: 2106810889404557286}
-  _personController: {fileID: -6523955846639269566}
+  _navMeshAgent: {fileID: 4227948338514078302}
   _weaponHolderAnchor: {fileID: 170623147861969171}
   _currentAction: 0
   _closestEnemy: {fileID: 0}
+  _directionToTarget: {x: 0, y: 0, z: 0}
+--- !u!195 &4227948338514078302
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170623147008066842}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &170623147050159213
 GameObject:
   m_ObjectHideFlags: 0
