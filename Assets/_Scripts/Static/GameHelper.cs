@@ -60,11 +60,16 @@ namespace _Scripts.Static
             }
         }
 
-        public static void CheckForNull<T>(T target) where T : class
+        public static void CheckForNull<T>(T target, Object source = null) where T : class
         {
             if (target == null)
             {
-                Debug.LogError($"{typeof(T).FullName} is null!");
+                string msg = $"{typeof(T).FullName} is null!";
+                if (source != null)
+                {
+                    msg += $" From source component: {source.name}!";
+                }
+                Debug.LogError(msg);
             }
         }
 

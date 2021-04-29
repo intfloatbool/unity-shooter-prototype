@@ -1849,6 +1849,7 @@ GameObject:
   - component: {fileID: 3518631735449087095}
   - component: {fileID: 1784832639353671288}
   - component: {fileID: 2077289040359828827}
+  - component: {fileID: 8000257450546441998}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1942,6 +1943,7 @@ MonoBehaviour:
   groundMinDistance: 0.25
   groundMaxDistance: 0.5
   slopeLimit: 45
+  input: {x: 0, y: 0, z: 0}
 --- !u!114 &3518631735449087116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2084,6 +2086,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teamType: 30
+--- !u!114 &8000257450546441998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3518631735449087113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11fa013ceb7d4672a16cd57f9bc2fd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _battleUnit: {fileID: 3518631735449087112}
+  _characterSettings: {fileID: 11400000, guid: 5e0c5b9f4028b0e43a02fdf8f1b6ba8c, type: 2}
 --- !u!1 &3518631735502510394
 GameObject:
   m_ObjectHideFlags: 0

@@ -130,7 +130,7 @@ namespace _Scripts.UI
             UpdateAmmoText();
         }
 
-        private void WeaponOnShot(int currentMagazine)
+        private void WeaponOnShot(WeaponBase weapon, int currentMagazine)
         {
             UpdateAmmoText();
         }

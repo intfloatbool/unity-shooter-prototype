@@ -18,7 +18,9 @@ namespace _Scripts.Battle
         [Space]
         [Header("Runtime")]
         [SerializeField] private AliveData _currentAliveData;
-        
+
+
+        public float DamageTakingMultipler { get; set; } = 1f;
         
         public event Action<AliveData, HitData> OnDamaged;
         public event Action OnDied; 
@@ -63,14 +65,14 @@ namespace _Scripts.Battle
             }
             
             var lastHp = _currentAliveData.CurrentHp;
-            var damage = hitData.damage;
+            var damage = hitData.damage *DamageTakingMultipler;
 
             var currentHp = lastHp - damage;
             currentHp = Mathf.Clamp(currentHp, 0, _hittableParams.MaxHp);
             bool isDead = currentHp <= 0;
             _currentAliveData = new AliveData(
                 _hittableParams.MaxHp,
-                currentHp,
+                Mathf.RoundToInt(currentHp),
                 isDead
             );
             

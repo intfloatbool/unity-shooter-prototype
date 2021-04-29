@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using _Scripts.Settings;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,9 +8,7 @@ namespace _Scripts.Battle.Weapons
 {
     public class FirearmWeapon : WeaponBase
     {
-        [SerializeField] private WeaponParams _weaponParams;
-        public WeaponParams weaponParams => _weaponParams;
-
+        
         [SerializeField] private Transform _muzzleAnchor;
 
         [Space]
@@ -27,12 +24,12 @@ namespace _Scripts.Battle.Weapons
         private float _reloadTimer;
         private float _shotDelayTimer;
 
+        public float ShotDelayMultipler { get; set; } = 1f;
+
         private LinkedList<GameObject> _projectilesPool;
 
-        /// <summary>
-        /// int arg = remains ammo
-        /// </summary>
-        public event Action<int> OnShot;
+
+        public override event Action<WeaponBase, int> OnShot;
         public event Action OnReloadStart;
         public event Action OnReloadDone;
 
@@ -74,7 +71,7 @@ namespace _Scripts.Battle.Weapons
             
             HandleShot();
             
-            OnShot?.Invoke(_currentMagazine);
+            OnShot?.Invoke(this, _currentMagazine);
         }
 
         private void HandleShot()
@@ -164,7 +161,7 @@ namespace _Scripts.Battle.Weapons
             if (_isReadyToShot)
                 return;
 
-            if (_shotDelayTimer >= _weaponParams.delay)
+            if (_shotDelayTimer >= _weaponParams.delay * ShotDelayMultipler)
             {
                 _isReadyToShot = true;
                 _shotDelayTimer = 0f;

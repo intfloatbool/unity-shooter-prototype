@@ -1,4 +1,6 @@
-﻿namespace _Scripts.Battle.Weapons
+﻿using UnityEngine;
+
+namespace _Scripts.Battle.Weapons
 {
     public class StandartWeaponController : WeaponControllerBase
     {
@@ -9,7 +11,16 @@
             {
                 damage = firearmWeapon.weaponParams.damageData.CalculateRandomDamage();
             }
-            
+
+            damage = Mathf.RoundToInt(((float) damage) * DamageMultipler);
+
+            float initialDamage = damage;
+            float scatteredDamage = initialDamage * DamageScatterMultipler;
+            float min = Mathf.Min(scatteredDamage, initialDamage);
+            float max = Mathf.Max(scatteredDamage, initialDamage);
+
+            damage = Mathf.RoundToInt(Random.Range(min, max));
+
             _weapon.UpdateHitData(
                 new HitData(
                     Owner,

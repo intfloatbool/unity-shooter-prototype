@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Battle.Base;
 using _Scripts.Enums;
 using _Scripts.Static;
 using UnityEngine;
@@ -149,6 +150,15 @@ namespace _Scripts.Battle
                     ));
                 }
                 
+            }
+
+            var setupableComponents = unitInstance.GetComponentsInChildren<ISetupable>(true);
+            foreach (var setupable in setupableComponents)
+            {
+                if (setupable != null)
+                {
+                    setupable.Setup();
+                }
             }
 
             InitUnit(unitInstance);

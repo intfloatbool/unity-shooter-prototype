@@ -1,4 +1,5 @@
-﻿using _Scripts.Static;
+﻿using _Scripts.Enums;
+using _Scripts.Static;
 using _Scripts.Structs;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ namespace _Scripts.Settings
     [CreateAssetMenu(fileName = "WeaponParams", menuName = "BattleSettings/WeaponParams")]
     public class WeaponParams : ScriptableObject
     {
+        [SerializeField] private WeaponType _weaponType;
+        public WeaponType WeaponType => _weaponType;
+        
         [SerializeField] private LayerMask _hitLayer;
         public LayerMask HitLayer => _hitLayer;
 

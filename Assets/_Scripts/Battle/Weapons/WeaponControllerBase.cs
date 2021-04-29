@@ -8,6 +8,9 @@ namespace _Scripts.Battle.Weapons
 {
     public abstract class WeaponControllerBase : MonoBehaviour, IOwnerable
     {
+        public float DamageScatterMultipler { get; set; } = 1f;
+        public float DamageMultipler { get; set; } = 1f;
+        
         [SerializeField] protected List<WeaponBase> _possibleWeapons;
         public IReadOnlyCollection<WeaponBase> PossibleWeapons => _possibleWeapons;
         
