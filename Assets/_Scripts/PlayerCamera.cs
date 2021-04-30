@@ -5,6 +5,7 @@ using UnityEngine.Assertions;
 
 namespace _Scripts
 {
+
     public class PlayerCamera : MonoBehaviour, IOwnerable
     {
 
@@ -20,6 +21,11 @@ namespace _Scripts
         {
             this.Owner = owner;
             _thirdPersonCamera.target = owner.transform;
+        }
+
+        public void SwitchCamera()
+        {
+            
         }
     }
 }
