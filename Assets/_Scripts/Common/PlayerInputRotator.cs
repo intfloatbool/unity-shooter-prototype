@@ -12,7 +12,7 @@ namespace _Scripts.Common
 
         private void Awake()
         {
-            _basicRotation = transform.rotation;
+            _basicRotation = transform.localRotation;
         }
 
         private void OnEnable()
@@ -22,7 +22,7 @@ namespace _Scripts.Common
 
         private void ResetRotation()
         {
-            transform.rotation = _basicRotation;
+            transform.localRotation = _basicRotation;
         }
 
         private void Update()
