@@ -10,7 +10,8 @@ namespace _Scripts
     {
 
         [SerializeField] private vThirdPersonCamera _thirdPersonCamera;
-
+        public vThirdPersonCamera ThirdPersonCamera => _thirdPersonCamera;
+        
         private void Awake()
         {
             Assert.IsNotNull(_thirdPersonCamera, "_thirdPersonCamera != null");

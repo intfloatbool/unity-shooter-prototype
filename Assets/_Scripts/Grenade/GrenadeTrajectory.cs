@@ -16,7 +16,7 @@ namespace _Scripts.Grenade
     }
     
     [RequireComponent(typeof(LineRenderer))]
-    public class TrajectoryRenderer : MonoBehaviour
+    public class GrenadeTrajectory : MonoBehaviour
     {
         [SerializeField] private LineRenderer _lineRenderer;
         
@@ -27,9 +27,12 @@ namespace _Scripts.Grenade
         [Header("Runtime")]
         [SerializeField] private Transform _target;
         [SerializeField] private Vector3 _targetPos;
-        [SerializeField] private Vector3 _gravity;
+        [SerializeField] private float _gravity = -9.5f;
+        
+        private Vector3 _basicGravity;
 
         private Vector3[] _positionsBuffer;
+        private bool _isChangedGravity;
 
         private void OnValidate()
         {
@@ -44,10 +47,35 @@ namespace _Scripts.Grenade
 
         private void Start()
         {
-            _gravity = Physics.gravity;
-
             _positionsBuffer = new Vector3[_resolution + 1];
             _lineRenderer.positionCount = _positionsBuffer.Length;
+
+            InitGravity();
+        }
+        
+        private void InitGravity()
+        {
+            var neededGravity = Vector3.up * _gravity;
+            if (!Physics.gravity.Equals(neededGravity))
+            {
+                _basicGravity = Physics.gravity;
+                Physics.gravity = neededGravity;
+                
+                Debug.Log($"Gravity changed by {transform.root.name} to: " + neededGravity);
+                _isChangedGravity = true;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (_isChangedGravity)
+            {
+                if (!Physics.gravity.Equals(_basicGravity))
+                {
+                    Physics.gravity = _basicGravity;
+                    Debug.Log($"Gravity reseted by {transform.root.name} to: " + _basicGravity);
+                }
+            }
         }
 
 
@@ -56,6 +84,12 @@ namespace _Scripts.Grenade
             //var launchData = CalculateLaunchData(_carRb.transform, _target);
             //_carRb.velocity = launchData.initalVelocity;
             //Debug.Log("Start launch!: " + launchData.initalVelocity);
+        }
+
+        public Vector3 CalculateVelocityForGrenade()
+        {
+            var launchData = CalculateLaunchData(transform, _target);
+            return launchData.initalVelocity;
         }
 
         public LaunchData CalculateLaunchData(Transform source, Vector3 target)
@@ -72,10 +106,10 @@ namespace _Scripts.Grenade
 
             float height = _height;
 
-            float time = Mathf.Sqrt(-2 * height / _gravity.y)
-                         + Mathf.Sqrt(2 * (displacementY - height) / _gravity.y);
+            float time = Mathf.Sqrt(-2 * height / _gravity)
+                         + Mathf.Sqrt(2 * (displacementY - height) / _gravity);
             
-            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _gravity.y * height);
+            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _gravity * height);
             Vector3 velocityXZ = displacementXZ / time;
             return new LaunchData(velocityXZ + velocityY * Mathf.Sign(height), time);
         }
@@ -103,7 +137,7 @@ namespace _Scripts.Grenade
             {
                 float simulationTime = i / (float) _resolution * launchData.timeToTarget;
                 Vector3 displacement = launchData.initalVelocity * simulationTime + Vector3.up *
-                    _gravity.y * simulationTime * simulationTime / 2f;
+                    _gravity * simulationTime * simulationTime / 2f;
                 Vector3 drawPoint = transform.position + displacement;
                 
                 Gizmos.DrawLine(prevPoint, drawPoint);
@@ -128,7 +162,7 @@ namespace _Scripts.Grenade
             {
                 float simulationTime = i / (float) _resolution * launchData.timeToTarget;
                 Vector3 displacement = launchData.initalVelocity * simulationTime + Vector3.up *
-                    _gravity.y * simulationTime * simulationTime / 2f;
+                    _gravity * simulationTime * simulationTime / 2f;
                 Vector3 drawPoint = transform.position + displacement;
                 
                 _positionsBuffer[i] = prevPoint;

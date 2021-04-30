@@ -10,11 +10,14 @@ namespace _Scripts.Battle
     {
         [SerializeField] private BattleUnit _battleUnit;
         [SerializeField] private UnitCommandInvoker _commandInvoker;
-
+        
+        /// Commands is very useful to setup custom controls in future!
+        
         private UnitCommandBase _shotCommand;
         private UnitCommandBase _swapWeaponsCommand;
         private UnitCommandBase _reloadWeaponCommand;
         private UnitCommandBase _selfKillCommand;
+        private UnitCommandBase _grenadeThrowCommand;
 
         private void OnValidate()
         {
@@ -43,6 +46,7 @@ namespace _Scripts.Battle
             _swapWeaponsCommand = new SwapWeaponsCommand(_battleUnit);
             _reloadWeaponCommand = new ReloadWeaponCommand(_battleUnit);
             _selfKillCommand = new SelfKillCommand(_battleUnit);
+            _grenadeThrowCommand = new GrenadeControllerSwitchCommand(_battleUnit);
         }
 
         private void Update()
@@ -75,6 +79,11 @@ namespace _Scripts.Battle
             if (Input.GetKeyDown(KeyCode.L))
             {
                 _commandInvoker.RunCommand(new SelfDamageCommand(_battleUnit, 15));
+            }
+            
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                _commandInvoker.RunCommand(_grenadeThrowCommand);
             }
         }
     }

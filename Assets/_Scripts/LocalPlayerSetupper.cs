@@ -10,6 +10,7 @@ namespace _Scripts
     public class LocalPlayerSetupper : MonoBehaviour
     {
         [SerializeField] private UnitSpawner _unitSpawner;
+        [SerializeField] private PlayerCamera _playerCamera;
         [SerializeField] private TeamChangerListenerBase[] _teamChangerListeners;
         private IOwnerable[] _localOwnerable;
         
@@ -26,6 +27,8 @@ namespace _Scripts
         private void Awake()
         {
             Assert.IsNotNull(_unitSpawner, "_unitSpawner != null");
+            
+            GameHelper.CheckForNull(_playerCamera, this);
 
             _localOwnerable = GetComponentsInChildren<IOwnerable>(true);
 
@@ -56,8 +59,8 @@ namespace _Scripts
             
             unit.HittableObject.OnDied += HittableObjectOnDied;
             _lastLocalPlayer = unit;
-            
 
+            unit.PlayerCamera = _playerCamera;
             foreach (var ownerable in _localOwnerable)
             {
                 ownerable.InitOwner(unit);

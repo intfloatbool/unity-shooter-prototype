@@ -1,4 +1,5 @@
 ﻿using _Scripts.Battle.Weapons;
+using _Scripts.Static;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,6 +10,26 @@ namespace _Scripts.Battle
         // Simulate photon using :-)
         [SerializeField] private bool _isLocalPlayer;
         public bool IsLocalPlayer => _isLocalPlayer;
+
+        private PlayerCamera _playerCamera;
+
+        public PlayerCamera PlayerCamera
+        {
+            get
+            {
+                if (!_isLocalPlayer)
+                {
+                    Debug.LogError($"Trying to access camera from NOT LOCAL PLAYER!");
+                    return null;
+                }
+
+                return _playerCamera;
+            }
+            set
+            {
+                _playerCamera = value;
+            }
+        }
         
         [SerializeField] private WeaponControllerBase _weaponController;
         public WeaponControllerBase WeaponController => _weaponController;
@@ -51,6 +72,11 @@ namespace _Scripts.Battle
             Assert.IsNotNull(_teamController, "_teamController != null");
             
             InitOwnerableChilds();
+        }
+
+        public void SetWeaponController(WeaponControllerBase weaponControllerBase)
+        {
+            _weaponController = weaponControllerBase;
         }
 
         private void InitOwnerableChilds()

@@ -59,6 +59,29 @@ namespace _Scripts.Static
                 Cursor.lockState = isLockCursor.Value ? CursorLockMode.Locked : CursorLockMode.None;
             }
         }
+        
+        public static void CheckForNull<T>(T target) where T : class
+        {
+            if (target == null)
+            {
+                string msg = $"{typeof(T).FullName} is null!";
+   
+                Debug.LogError(msg);
+            }
+        }
+        
+        public static void CheckForNull<T>(T target, string source = null) where T : class
+        {
+            if (target == null)
+            {
+                string msg = $"{typeof(T).FullName} is null!";
+                if (source != null)
+                {
+                    msg += $" From source component: {source}!";
+                }
+                Debug.LogError(msg);
+            }
+        }
 
         public static void CheckForNull<T>(T target, Object source = null) where T : class
         {
