@@ -1,10 +1,9 @@
-﻿using System;
-using _Scripts.Static;
+﻿using _Scripts.Static;
 using UnityEngine;
 
 namespace _Scripts.Grenade
 {
-    struct LaunchData
+    public struct LaunchData
     {
         public readonly Vector3 initalVelocity;
         public readonly float timeToTarget;
@@ -28,7 +27,9 @@ namespace _Scripts.Grenade
         [Header("Runtime")]
         [SerializeField] private Transform _target;
         [SerializeField] private Vector3 _targetPos;
-        [SerializeField] private Vector3 _gravity;   
+        [SerializeField] private Vector3 _gravity;
+
+        private Vector3[] _positionsBuffer;
 
         private void OnValidate()
         {
@@ -44,6 +45,9 @@ namespace _Scripts.Grenade
         private void Start()
         {
             _gravity = Physics.gravity;
+
+            _positionsBuffer = new Vector3[_resolution + 1];
+            _lineRenderer.positionCount = _positionsBuffer.Length;
         }
 
 
@@ -54,7 +58,7 @@ namespace _Scripts.Grenade
             //Debug.Log("Start launch!: " + launchData.initalVelocity);
         }
 
-        private LaunchData CalculateLaunchData(Transform source, Vector3 target)
+        public LaunchData CalculateLaunchData(Transform source, Vector3 target)
         {
             var sourcePos = source.position;
             var targetPos = target;
@@ -85,10 +89,10 @@ namespace _Scripts.Grenade
         {
             Gizmos.color = Color.red;
 
-            DrawTrajectory();
+            DrawTrajectoryGizmo();
         }
 
-        private void DrawTrajectory()
+        private void DrawTrajectoryGizmo()
         {
             var launchData = _target != null 
                 ? CalculateLaunchData(transform, _target) 
@@ -105,6 +109,38 @@ namespace _Scripts.Grenade
                 Gizmos.DrawLine(prevPoint, drawPoint);
                 prevPoint = drawPoint;
             }
+        }
+
+        private void Update()
+        {
+            DrawTrajectoryLineRenderer();
+        }
+
+        private void DrawTrajectoryLineRenderer()
+        {
+            var launchData = _target != null 
+                ? CalculateLaunchData(transform, _target) 
+                : CalculateLaunchData(transform, _targetPos);
+
+            Vector3 prevPoint = transform.position;
+            int bufferIndex = 1;
+            for (int i = 0; i < _resolution; i++)
+            {
+                float simulationTime = i / (float) _resolution * launchData.timeToTarget;
+                Vector3 displacement = launchData.initalVelocity * simulationTime + Vector3.up *
+                    _gravity.y * simulationTime * simulationTime / 2f;
+                Vector3 drawPoint = transform.position + displacement;
+                
+                _positionsBuffer[i] = prevPoint;
+                _positionsBuffer[bufferIndex] = drawPoint;
+                
+                prevPoint = drawPoint;
+
+                bufferIndex++;
+            }
+            
+            _lineRenderer.SetPositions(_positionsBuffer);
+            
         }
     }
 }

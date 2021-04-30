@@ -4,6 +4,9 @@ namespace _Scripts.Common
 {
     public class TransformRotationCopier : MonoBehaviour
     {
+        [SerializeField] private bool _isInstant = true;
+        [SerializeField] private float _followSpeed = 7f;
+        
         [SerializeField] private Transform _target;
         [SerializeField] private bool _isFreezeByX;
         [SerializeField] private bool _isFreezeByY;
@@ -39,8 +42,15 @@ namespace _Scripts.Common
                 targetEuler.z = 0;
                 targetRot = Quaternion.Euler(targetEuler);
             }
-            
-            transform.rotation = targetRot;
+
+            if (_isInstant)
+            {
+                transform.rotation = targetRot;   
+            }
+            else
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation,  targetRot, _followSpeed * Time.deltaTime);
+            }
         }
     }
 }
