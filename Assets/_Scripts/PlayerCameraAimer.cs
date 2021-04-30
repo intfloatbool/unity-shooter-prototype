@@ -7,14 +7,10 @@ namespace _Scripts
 {
     public class PlayerCameraAimer : MonoBehaviour, IOwnerable
     {
-        [SerializeField] private TransformRotationCopier _rotationCopier;
+        [SerializeField] private TransformRotationCopier[] _rotationCopiers;
         
         public BattleUnit Owner { get; private set; }
-
-        private void Awake()
-        {
-            Assert.IsNotNull(_rotationCopier, "_rotationCopier != null");
-        }
+        
 
         public void InitOwner(BattleUnit owner)
         {
@@ -25,7 +21,10 @@ namespace _Scripts
 
             if (Camera.main != null)
             {
-                _rotationCopier.Target = Camera.main.transform;   
+                foreach (var rotationCopier in _rotationCopiers)
+                {
+                    rotationCopier.Target = Camera.main.transform;   
+                }
             }
         }
     }
