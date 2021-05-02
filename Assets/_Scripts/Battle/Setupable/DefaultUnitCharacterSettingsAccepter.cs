@@ -1,32 +1,33 @@
 ﻿using _Scripts.Battle.Base;
 using _Scripts.Battle.Weapons;
+using _Scripts.Settings;
 using _Scripts.Static;
 
 namespace _Scripts.Battle.Setupable
 {
     public class DefaultUnitCharacterSettingsAccepter : CharacterSettingsAccepterBase
     {
-        public override void AcceptSettings()
+        public override void AcceptSettings(PlayerCharacteristicsData data)
         {
             var speedController = GetComponentInChildren<UnitSpeedControllerBase>();
             GameHelper.CheckForNull(speedController);
             if (speedController != null)
             {
-                speedController.SetDefaultSpeedMultipler(_characterSettings.moveSpeedMultipler);
+                speedController.SetDefaultSpeedMultipler(data.moveSpeedMultipler);
             }
 
-            _battleUnit.WeaponController.DamageMultipler = _characterSettings.damageDealingMultipler;
-            _battleUnit.WeaponController.DamageScatterMultipler = _characterSettings.damageScatterMultipler;
+            _battleUnit.WeaponController.DamageMultipler = data.damageDealingMultipler;
+            _battleUnit.WeaponController.DamageScatterMultipler = data.damageScatterMultipler;
 
             foreach (var weapon in _battleUnit.WeaponController.PossibleWeapons)
             {
                 if (weapon is FirearmWeapon firearmWeapon)
                 {
-                    firearmWeapon.ShotDelayMultipler = _characterSettings.attackSpeedMultipler;
+                    firearmWeapon.ShotDelayMultipler = data.attackSpeedMultipler;
                 }
             }
 
-            _battleUnit.HittableObject.DamageTakingMultipler = _characterSettings.damageTakingMultipler;
+            _battleUnit.HittableObject.DamageTakingMultipler = data.damageTakingMultipler;
         }
     }
 }
