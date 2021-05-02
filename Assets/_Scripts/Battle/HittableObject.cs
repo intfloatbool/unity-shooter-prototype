@@ -19,6 +19,7 @@ namespace _Scripts.Battle
         [Header("Runtime")]
         [SerializeField] private AliveData _currentAliveData;
 
+        public HitData LastHitData { get; private set; }
 
         public float DamageTakingMultipler { get; set; } = 1f;
         
@@ -75,6 +76,8 @@ namespace _Scripts.Battle
                 Mathf.RoundToInt(currentHp),
                 isDead
             );
+
+            LastHitData = hitData;
             
             OnDamaged?.Invoke(_currentAliveData, hitData);
             
@@ -83,6 +86,7 @@ namespace _Scripts.Battle
                 _onDeadUnityEv?.Invoke();
                 OnDied?.Invoke();
             }
+            
         }
 
         public void SelfDamage(int dmg)

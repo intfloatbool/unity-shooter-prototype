@@ -27,6 +27,8 @@ namespace _Scripts
                     img.color = color;
                 }
             }
+
+            _teamController.TeamColor = color;
         }
     }
 }

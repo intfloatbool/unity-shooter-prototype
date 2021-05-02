@@ -11,6 +11,8 @@ namespace _Scripts
         [Header("Runtime")]
         [SerializeField] private TeamType _teamType;
         public TeamType TeamType => _teamType;
+        
+        public Color TeamColor { get; set; }
 
         public event Action<TeamType> OnTeamChanged; 
         
