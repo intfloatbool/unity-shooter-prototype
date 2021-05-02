@@ -11,6 +11,7 @@
 
 ### Features:
 
+- Simple AI and ready to start be smarter
 - Ready for online (checking local/not local player)
 - Ready command-system (on player input)
 - Flexible design
