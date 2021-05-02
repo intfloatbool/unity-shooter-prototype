@@ -1134,6 +1134,7 @@ GameObject:
   - component: {fileID: 4227948338514078302}
   - component: {fileID: 9094437749300551536}
   - component: {fileID: -606080752615269440}
+  - component: {fileID: 1729747220525639049}
   m_Layer: 8
   m_Name: EmptyBOT_SHOTGUN
   m_TagString: Untagged
@@ -1359,6 +1360,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _battleUnit: {fileID: 170623147008066847}
   _characterSettings: {fileID: 11400000, guid: 5263cc16a2caa92468d8b603f08b0d78, type: 2}
+  _currentSettingsData:
+    _moveSpeedMultipler: 0
+    _attackSpeedMultipler: 0
+    _damageDealingMultipler: 0
+    _damageTakingMultipler: 0
+    _damageScatterMultipler: 0
+--- !u!114 &1729747220525639049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170623147008066842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b60178b7d4cfc4f85aa4e21baf71a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settingsAccepter: {fileID: -606080752615269440}
 --- !u!1 &170623147050159213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,6 +2196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 575744162d03a01459ee665ba3438ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isInstant: 1
+  _followSpeed: 7
   _target: {fileID: 0}
   _isFreezeByX: 0
   _isFreezeByY: 0
@@ -4486,6 +4508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a59534fc4cc874e448332348833d8422, type: 3}
+--- !u!4 &4468558414396815434 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1406575655551285583, guid: a59534fc4cc874e448332348833d8422, type: 3}
+  m_PrefabInstance: {fileID: 3280497570881519877}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4468558414396815435 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1406575655551285582, guid: a59534fc4cc874e448332348833d8422, type: 3}
@@ -4497,8 +4524,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e85467f244b5b4a8eb97e9e8810419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &4468558414396815434 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1406575655551285583, guid: a59534fc4cc874e448332348833d8422, type: 3}
-  m_PrefabInstance: {fileID: 3280497570881519877}
-  m_PrefabAsset: {fileID: 0}

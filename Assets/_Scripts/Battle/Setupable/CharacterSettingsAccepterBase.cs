@@ -12,6 +12,8 @@ namespace _Scripts.Battle.Setupable
         [SerializeField] protected CharacterSettings _characterSettings;
 
         protected PlayerCharacteristicsData? _defaultSettingsData;
+        public PlayerCharacteristicsData? DefaultSettingsData => _defaultSettingsData;
+        
         [SerializeField] protected PlayerCharacteristicsData _currentSettingsData;
         
         protected virtual void OnValidate()

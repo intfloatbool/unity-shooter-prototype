@@ -1,5 +1,6 @@
 ﻿using _Scripts.Battle.Commands;
 using _Scripts.Battle.Commands.Concrete;
+using _Scripts.Settings;
 using _Scripts.Static;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -8,6 +9,7 @@ namespace _Scripts.Battle
 {
     public class UnitActionsController : MonoBehaviour
     {
+        [SerializeField] private PassiveAbilityParams[] _possibleAbilities;
         [SerializeField] private BattleUnit _battleUnit;
         [SerializeField] private UnitCommandInvoker _commandInvoker;
         
@@ -18,6 +20,8 @@ namespace _Scripts.Battle
         private UnitCommandBase _reloadWeaponCommand;
         private UnitCommandBase _selfKillCommand;
         private UnitCommandBase _grenadeThrowCommand;
+        private UnitCommandBase _randomAbilityCommand;
+        private UnitCommandBase _clearAbilityCommand;
 
         private void OnValidate()
         {
@@ -47,6 +51,8 @@ namespace _Scripts.Battle
             _reloadWeaponCommand = new ReloadWeaponCommand(_battleUnit);
             _selfKillCommand = new SelfKillCommand(_battleUnit);
             _grenadeThrowCommand = new GrenadeControllerSwitchCommand(_battleUnit);
+            _randomAbilityCommand = new RandomAbilityCommand(_battleUnit, _possibleAbilities);
+            _clearAbilityCommand = new ClearAbilityCommand(_battleUnit);
         }
 
         private void Update()
@@ -84,6 +90,16 @@ namespace _Scripts.Battle
             if (Input.GetKeyDown(KeyCode.G))
             {
                 _commandInvoker.RunCommand(_grenadeThrowCommand);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                _commandInvoker.RunCommand(_randomAbilityCommand);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                _commandInvoker.RunCommand(_clearAbilityCommand);
             }
         }
     }

@@ -33,7 +33,7 @@ namespace _Scripts.Settings
             this._attackSpeedMultipler = attackSpeedMultipler;
             this._damageDealingMultipler = damageDealingMultipler;
             this._damageTakingMultipler = damageTakingMultipler;
-            this._damageScatterMultipler = damageDealingMultipler;
+            this._damageScatterMultipler = damageScatterMultipler;
         }
     }
     
