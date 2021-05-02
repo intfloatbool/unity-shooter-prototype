@@ -1,0 +1,5 @@
+{
+	"match_type_choice_label" : "Выбери режим игры:",
+	"death_match_type" : "Командная схватка",
+	"ffa_match_type" : "Каждый сам за себя"
+}
