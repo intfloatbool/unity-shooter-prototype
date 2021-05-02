@@ -1,4 +1,5 @@
-﻿using _Scripts.Battle.Weapons;
+﻿using System.Collections;
+using _Scripts.Battle.Weapons;
 using _Scripts.Static;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -74,8 +75,21 @@ namespace _Scripts.Battle
             InitOwnerableChilds();
         }
 
-        public void SetWeaponController(WeaponControllerBase weaponControllerBase)
+        public void SetWeaponController(WeaponControllerBase weaponControllerBase, float? delay = null)
         {
+            if (delay.HasValue)
+            {
+                StartCoroutine(SetWeaponControllerByDelay(weaponControllerBase, delay.Value));
+            }
+            else
+            {
+                _weaponController = weaponControllerBase;   
+            }
+        }
+
+        private IEnumerator SetWeaponControllerByDelay(WeaponControllerBase weaponControllerBase, float delay)
+        {
+            yield return new WaitForSeconds(delay);
             _weaponController = weaponControllerBase;
         }
 

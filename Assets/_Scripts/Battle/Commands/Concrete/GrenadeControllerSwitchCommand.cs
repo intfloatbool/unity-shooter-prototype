@@ -27,11 +27,11 @@ namespace _Scripts.Battle.Commands.Concrete
 
         private void OnGrenadeLaunchedCallback()
         {
-            _receiverUnit.SetWeaponController(_defaultWeaponController);
+            _receiverUnit.SetWeaponController(_defaultWeaponController, 0.3f);
             _grenadeController.SetActiveGrenadeMode(false);
             _isGrenadeModeActivated = false;
         }
-
+        
         public override void Execute()
         {
             _isGrenadeModeActivated = !_isGrenadeModeActivated;
@@ -39,6 +39,10 @@ namespace _Scripts.Battle.Commands.Concrete
             if (_isGrenadeModeActivated == true)
             {
                 _receiverUnit.SetWeaponController(_nullWeaponController);
+            }
+            else
+            {
+                _receiverUnit.SetWeaponController(_defaultWeaponController, 0.3f);
             }
         }
     }
